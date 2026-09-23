@@ -1,9 +1,9 @@
-## Introduction
+# Introduction
 The aim of this project is to create a simple logistic regression classifier that will draw a straight line separating two point clouds.
 The two point clouds are classified by one of 2 labels: 0 or 1.
 
-## How this code works
-# Initial information
+# How this code works
+## Initial information
 Since this code can only draw straight lines there are only three parameters that can be adjusted.
 The linear equation is expressed as follows: ax + by + c = 0, where:
 - a - the rate x is changing
@@ -18,7 +18,7 @@ For code to start three values are needed:
 - in_b - arbitrary initial b value
 - lr   - arbitrary learning rate
 
-# Parameters adjustment
+## Parameters adjustment
 Each iteration starts by checking how the model classified every point.
 For each point the value of the function is calculated given the current value of the weights a and b.
 This value is given as an argument to the sigmoid function: p = sigmoid(s) = 1 / (1 + np.exp(-s)),
@@ -39,10 +39,10 @@ L = -[label * log(p) + (1-label) * log(1-p)]
 To find out how a and b should change to reduce this error, we need the derivative of L with respect to each of them.
 Since L depends on p, and p depends on s (which depends on a and b), this requires the chain rule, in two steps:
 
-1. How L changes with p:
+- How L changes with p:
    dL/dp = (1-label)/(1-p) - label/p
 
-2. How p changes with s (the derivative of the sigmoid function itself):
+- How p changes with s (the derivative of the sigmoid function itself):
    dp/ds = p * (1 - p)
 
 Multiplying these together, we get the result:
@@ -59,7 +59,7 @@ The learning rate lr then scales these gradients into the actual step taken each
 Due to implementation in the code, value label is replaced by target, which is the opposite label (target = 1 - label),
 to match this project's convention that a positive s corresponds to label 0 rather than label 1.
 
-# Accuracy check
+## Accuracy check
 The weights adjustment is continued in the while loop until the accuracy threshold is achieved.
 Accuracy here is defined by how many points were classified correctly vs the total number of points.
 Once the threshold is reached the while loop is broken and the final values of a and b are returned.
